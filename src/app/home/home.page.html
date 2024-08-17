@@ -1,0 +1,116 @@
+<!--
+  1. Take out the comments
+  2. Search Bar
+-->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    
+  <ion-card>
+    <ion-card-header color="tertiary">
+      <ion-card-subtitle>{{this.expenseService.selectedDate | date: 'fullDate'}}</ion-card-subtitle>
+      <ion-card-subtitle>Total Expense</ion-card-subtitle>
+      <ion-card-title>Today's Total: $ {{todaysTotal}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-item button="true" id="open-date-input">
+      <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
+      <ion-label>Change Date</ion-label>
+      <ion-popover trigger="open-date-input" show-backdrops="false">
+        <ng-template>
+          <ion-datetime
+          color="primary"
+          [(ngModel)]="selectedDate"
+          (ionChange)="filterWithDate()"
+          [showDefaultTitle]="'false'"
+          [preferWheel]="'false'"
+          [max]="'3004-11-19'"
+          [min]="'2004-11-19'"
+          presentation="date"
+          [value]="dateValue2"
+          [mode]="'md'"
+          >
+          <ion-buttons slot="buttons">
+            <ion-button (click)="cancel()" color="danger">Cancel</ion-button>
+            <ion-button color="primary" (click)="reset()">Reset</ion-button>
+            <ion-button color="primary" (click)="confirm()">Set</ion-button>
+          </ion-buttons>
+          </ion-datetime>
+          </ng-template>
+      </ion-popover>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngFor="let item of expenses; let i = index">
+    <ion-card-header color="dark">
+      <ion-card-subtitle>{{item.date | date:'medium'}}</ion-card-subtitle>
+      <ion-card-title>{{item.description}}</ion-card-title>
+
+      <ion-fab vertical="top" horizontal="end">
+        <ion-fab-button size="small" expand="block" shape="round" color="danger" (click)="removeExpense(i)">
+          <ion-icon size="small" name="trash-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+    </ion-card-header>
+    <ion-item>
+      <ion-icon slot="start" name="logo-usd"></ion-icon>
+      <ion-label style="color: darkred;">-{{item.amount}}</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-card-subtitle>Category: {{item.type}}</ion-card-subtitle>
+      <!-- <ion-card-subtitle>Description: {{item.description}}</ion-card-subtitle> -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let item of incomes; let i = index">
+    <ion-card-header color="medium">
+      <ion-card-subtitle>{{item.date | date:'medium'}}</ion-card-subtitle>
+      <ion-card-title>{{item.description}}</ion-card-title>
+
+      <ion-fab vertical="top" horizontal="end">
+        <ion-fab-button size="small" expand="block" shape="round" color="danger" (click)="removeIncome(i)">
+          <ion-icon size="small" name="trash-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+    </ion-card-header>
+    <ion-item>
+      <ion-icon slot="start" name="logo-usd"></ion-icon>
+      <ion-label style="color: darkgreen;">+{{item.amount}}</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-card-subtitle>Category: {{item.type}}</ion-card-subtitle>
+      <!-- <ion-card-subtitle>Description: {{item.description}}</ion-card-subtitle> -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="presentAddComponent()">
+        <ion-icon name="logo-usd"></ion-icon>
+        Expense
+      </ion-tab-button>
+      <ion-tab-button (click)="presentAddIncComponent()">
+        <ion-icon name="card-outline"></ion-icon>
+        Income
+      </ion-tab-button>
+      <ion-tab-button (click)="presentCalComponent()">
+        <ion-icon name="calendar"></ion-icon>
+        Calendar
+      </ion-tab-button>
+      <ion-tab-button (click)="presentChartComponent()">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        Chart
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  
+</ion-content>

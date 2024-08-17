@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Chart Review
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list-header color="light">Line Chart for Expenses</ion-list-header>
+  <ion-list>
+    <ion-item>
+      <ion-select aria-label="Type" interface="popover" placeholder="Select Type of Graph" (ionChange)="onTypeChange($event)">
+        <ion-select-option value="line">Line</ion-select-option>
+        <ion-select-option value="bar">Bar</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>Number of Viewers per season for</ion-card-subtitle>
+      <ion-card-title>Game of Thrones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barChart></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+<!-- Close Button -->
+<ion-button (click)="dismissModal()" expand="block" shape="default" color="danger">
+  Close Chart Review
+</ion-button>

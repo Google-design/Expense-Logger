@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Monthly Expense
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-content>
+
+  <div class="calendar-wrapper">
+    <mat-calendar (monthSelected)="handleMonthSelected($event)" #calendar [(selected)]="selectedDate">
+    </mat-calendar>
+  </div>
+
+  <!-- <ion-datetime
+  format="YYYY-MM"
+  [preferWheel]="'false'"
+  [max]="'3004-11-19'"
+  [min]="'2004-11-19'"
+  color="primary"
+  [showDefaultTitle]="'true'"
+  [value]="'new Date(Date.now()).toISOString()'"
+  >
+  <span slot="title">Select a Month to Review Expenses</span>
+  </ion-datetime> -->
+
+<!-- Close Button -->
+<ion-button (click)="dismissModal()" expand="block" shape="default" color="danger">
+  Close Monthly Review
+</ion-button>
+</ion-content>
